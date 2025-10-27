@@ -8,28 +8,28 @@ function App() {
   const [tasklist, setTasklist] = useState<string[]>([])
   const [input, setInput] = useState('')
 
-const handleAddTask = () => {
-  setTasklist([...tasklist, input])
-  setInput('')
-}
+  const handleAddTask = () => {
+    setTasklist([...tasklist, input])
+    setInput('')
+  }
 
-useEffect(() => {
-  document.title = `Lista de Tarefas ${tasklist.length}`
-}, [tasklist])
+  useEffect(() => {
+    document.title = `Lista de Tarefas ${tasklist.length}`
+  }, [tasklist])
 
-  return (
-    <>
-    <GithubProfile />
-      <InputTarefa  
-        valorInput={input}
-        onChangeInput={(e) => setInput(e.target.value)}
-        onClickButton={handleAddTask} 
-      />
-      <ListaTarefa 
-        tarefas={tasklist}
-      />
-    </>
-  )
+    return (
+      <>
+      <GithubProfile />
+        <InputTarefa
+          valorInput={input}
+          onChangeInput={(e) => setInput(e.target.value)}
+          onClickButton={handleAddTask}
+        />
+        <ListaTarefa
+          tarefas={tasklist}
+        />
+      </>
+    )
 }
 
 export default App

@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function GithubProfile() {
     let content;
     const [data, setData] = useState<any>(null)
     const [loading, setLoading] = useState(true)
+    const [username, setUsername] = useState('octocat')
     const [error, setError] = useState<string | null>(null)
     const [input, setInput] = useState('')
-    const [username, setUsername] = useState('octocat')
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,7 +22,7 @@ function GithubProfile() {
                 if (!response.ok) {
                     throw new Error(`HTTP Error! Status, ${response.status}`)
                 }
-                const jsonData = await response.json()
+                const jsonData = await response.json();
                 setData(jsonData);
             } catch (error: any) {
                 setError(error.message)
@@ -52,12 +54,14 @@ function GithubProfile() {
                 onChange={(e) => setInput(e.target.value)}
             />
             <button 
-                onClick={() => setUsername(input)}>
+                onClick={() => {
+                    setUsername(input);
+                    navigate(`/perfil/${input}`);
+                }}>
                 Buscar
             </button>
         </div>
     )
-
 }
 
 export default GithubProfile
